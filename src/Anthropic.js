@@ -39,17 +39,7 @@ const Anthropic = (props) => {
     const [promptTemplate, setPromptTemplate] = useState("Use the context to answer the question at the end. If you don't know the answer from the context, do not answer from your knowledge and be precise. Don't fake the answer.")
     const [promptTemplateResponse, setPromptTemplateResponse] = useState('')
     
-    const [isFeedBackOpen, setisFeedBackOpen] = useState(false);
- 
-    const openFeedBack = () => {
-        setisFeedBackOpen(true);
-      };
-    
-      const closeFeedBack = () => {
-        setisFeedBackOpen(false);
-      };
-
-      const showFeedbackLabel = (msg) => {
+    const showFeedbackLabel = (msg) => {
         return msg.length > 1 ? true:false;
       }
 
@@ -68,10 +58,9 @@ const Anthropic = (props) => {
         checkVector();
 
         // Set up an interval to call the API every minute
-        const interval = setInterval(checkVector, 10000); // 60000 milliseconds = 1 minute
+        const interval = setInterval(checkVector, 100000); // 60000 milliseconds = 1 minute
         console.log(props.currentVector)
 
-        // setCurrentVector(props.currentVector)
         setKendraInstantiated(props.kendraInstantiated)
         setPromptTemplate(props.promptTemplate)
         setCurrentVector(props.currentVector)
