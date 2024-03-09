@@ -18,6 +18,7 @@ const modelOptions = [
 ]
 
 const App = ({ signOut }) => {
+    document.title = 'Bedrock Chatbot Demo (BETA)';
     const [modelSelected, setModelSelected] = useState('Anthropic: Claude');
     const [anthropicMessages, setAnthropicMessages] = useState([]);
     const [amazonMessages, setAmazonMessages] = useState([]);

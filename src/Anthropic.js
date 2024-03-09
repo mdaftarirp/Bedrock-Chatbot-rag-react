@@ -120,11 +120,11 @@ const Anthropic = (props) => {
         props.setAnthropicMessages(prevChatMessages => [...prevChatMessages, messageElement]);
 
         let payload = {
-            modelId: 'anthropic.claude-instant-v1',
+            modelId: 'anthropic.claude-3-sonnet-20240229-v1:0',
             contentType: 'application/json',
             accept: '*/*',
             body: JSON.stringify({
-                prompt: userInput,
+                prompt: userInput.replace(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~"'’]/g),
                 max_tokens_to_sample: 300,
                 temperature: 0.5,
                 top_k: 250,
@@ -541,12 +541,12 @@ const Anthropic = (props) => {
                             <p className="VectorSelection">Please select an option for vector database:</p>
                             <div className="VectorSelection">
                                 <div className="VectorInnerSelection">
-                                    <Button onClick={() => setVectorSelection('local')}>Local In-Memory Vector DB (FAISS)</Button>
-                                    <Button className={currentVector === "faiss" ? "VectorUseButton Active" : "VectorUseButton"} onClick={() => handleSetVector('faiss')}>Use FAISS</Button>
+                                    <Button onClick={() => setVectorSelection('local')}>Upload Documents for Summarization And Q/A (Local in memory DB FAISS)</Button>
+                                    <Button className={currentVector === "faiss" ? "VectorUseButton Active" : "VectorUseButton"} onClick={() => handleSetVector('faiss')}>Multimedia Files</Button>
                                 </div>
                                 <div className="VectorInnerSelection">
-                                    <Button onClick={() => setVectorSelection('kendra')}>Amazon Kendra Index</Button>
-                                    <Button className={currentVector === "kendra" ? "VectorUseButton Active" : "VectorUseButton"} disabled={!kendraInstantiated} onClick={() => handleSetVector('kendra')}>Use Kendra</Button>
+                                    <Button onClick={() => setVectorSelection('kendra')}>Existing Search Index (Amazon Kendra)</Button>
+                                    <Button className={currentVector === "kendra" ? "VectorUseButton Active" : "VectorUseButton"} disabled={!kendraInstantiated} onClick={() => handleSetVector('kendra')}>Use Search Index (Kendra)</Button>
                                 </div>
                             </div>
                         </span>
