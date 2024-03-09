@@ -727,6 +727,7 @@ def call_stable_diffusion():
     print(request)
     print(payload['body'])
     print(json.loads(payload['body'])['text_prompts'][0]['text'])
+    
     if input_validation(json.loads(payload['body'])['text_prompts'][0]['text']):
         response =bedrock_client.invoke_model(
             body=payload['body'],

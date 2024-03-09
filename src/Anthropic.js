@@ -4,6 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, TextField } from '@aws-amplify/ui-react';
 import proxy_url from './proxy'
+import StarRating from "./StarRating";
 
 const api_root_url = proxy_url
 
@@ -37,6 +38,20 @@ const Anthropic = (props) => {
     const [promptModal, setPromptModal] = useState(false)
     const [promptTemplate, setPromptTemplate] = useState("Use the context to answer the question at the end. If you don't know the answer from the context, do not answer from your knowledge and be precise. Don't fake the answer.")
     const [promptTemplateResponse, setPromptTemplateResponse] = useState('')
+    
+    const [isFeedBackOpen, setisFeedBackOpen] = useState(false);
+ 
+    const openFeedBack = () => {
+        setisFeedBackOpen(true);
+      };
+    
+      const closeFeedBack = () => {
+        setisFeedBackOpen(false);
+      };
+
+      const showFeedbackLabel = (msg) => {
+        return msg.length > 1 ? true:false;
+      }
 
     useEffect(() => {
         // Code to run after component has mounted
@@ -125,7 +140,8 @@ const Anthropic = (props) => {
             accept: '*/*',
             body: JSON.stringify({
                 prompt: userInput.replace(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~"'’]/g),
-                max_tokens_to_sample: 300,
+                max_tokens_to_sample: 2000,
+                anthropic_version:"bedrock-2023-05-31",
                 temperature: 0.5,
                 top_k: 250,
                 top_p: 1,
@@ -473,6 +489,9 @@ const Anthropic = (props) => {
                         <span className="MessageText" dangerouslySetInnerHTML={{ __html: message.message }}></span>
                     </p>
                 ))}
+                <>
+                   <div>{ (!isBuffering && showFeedbackLabel(chatMessages))  && <StarRating /> } </div>  
+                </>
             </div>
             {isBuffering &&
                 <div className="dots">

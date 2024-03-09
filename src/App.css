@@ -2237,6 +2237,23 @@ button.amplify-menu-content__item.active {
     padding-left: 150px;
 }
 
+.star-rating{
+    font-family: Ember;
+    font-size: 16px;
+    text-align: left;
+}
 
-  
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.on {
+  color: #e98300;
+}
+.off {
+  color: #ccc;
+}
+
 
