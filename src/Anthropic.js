@@ -47,7 +47,7 @@ const Anthropic = (props) => {
         // Code to run after component has mounted
         if (props.anthropicMessages.length === 0) {
             setChatMessages([
-                { author: `${props.modelSelected.split(':')[1]} Bot`, message: `Welcome to the ${props.modelSelected} Chatbot!` }
+                { author: `${props.modelSelected.split(':')[1]} Bot`, message: `How may I assist you today?` }
             ])
         } else {
             setChatMessages(props.anthropicMessages)
@@ -124,13 +124,12 @@ const Anthropic = (props) => {
         props.setAnthropicMessages(prevChatMessages => [...prevChatMessages, messageElement]);
 
         let payload = {
-            modelId: 'anthropic.claude-3-sonnet-20240229-v1:0',
+            modelId: 'anthropic.claude-v2',
             contentType: 'application/json',
             accept: '*/*',
             body: JSON.stringify({
                 prompt: userInput.replace(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~"'’]/g),
-                max_tokens_to_sample: 2000,
-                anthropic_version:"bedrock-2023-05-31",
+                max_tokens_to_sample: 2048,
                 temperature: 0.5,
                 top_k: 250,
                 top_p: 1,
@@ -206,10 +205,10 @@ const Anthropic = (props) => {
 
     const clearChatHistory = () => {
         setChatMessages([
-            { author: `${selectedModel.split(':')[1]} Bot`, message: `Welcome to the ${selectedModel} Chatbot!` }
+            { author: `${selectedModel.split(':')[1]} Bot`, message: `How may I assist you today?` }
         ])
         props.setAnthropicMessages([
-            { author: `${selectedModel.split(':')[1]} Bot`, message: `Welcome to the ${selectedModel} Chatbot!` }
+            { author: `${selectedModel.split(':')[1]} Bot`, message: `How may I assist you today?` }
         ])
     }
 
