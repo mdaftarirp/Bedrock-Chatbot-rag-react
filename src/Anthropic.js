@@ -47,7 +47,7 @@ const Anthropic = (props) => {
         // Code to run after component has mounted
         if (props.anthropicMessages.length === 0) {
             setChatMessages([
-                { author: `${props.modelSelected.split(':')[1]} Bot`, message: `How may I assist you today?` }
+                { author: `${props.modelSelected.split(':')[1]} Bot`, message: `Welcome to the ${props.modelSelected} Chatbot!` }
             ])
         } else {
             setChatMessages(props.anthropicMessages)
@@ -58,7 +58,7 @@ const Anthropic = (props) => {
         checkVector();
 
         // Set up an interval to call the API every minute
-        const interval = setInterval(checkVector, 100000); // 60000 milliseconds = 1 minute
+        const interval = setInterval(checkVector, 10000); // 60000 milliseconds = 1 minute
         console.log(props.currentVector)
 
         setKendraInstantiated(props.kendraInstantiated)
@@ -205,10 +205,10 @@ const Anthropic = (props) => {
 
     const clearChatHistory = () => {
         setChatMessages([
-            { author: `${selectedModel.split(':')[1]} Bot`, message: `How may I assist you today?` }
+            { author: `${selectedModel.split(':')[1]} Bot`, message: `Welcome to the ${selectedModel} Chatbot!` }
         ])
         props.setAnthropicMessages([
-            { author: `${selectedModel.split(':')[1]} Bot`, message: `How may I assist you today?` }
+            { author: `${selectedModel.split(':')[1]} Bot`, message: `Welcome to the ${selectedModel} Chatbot!` }
         ])
     }
 

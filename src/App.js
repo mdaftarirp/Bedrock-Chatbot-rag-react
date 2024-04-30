@@ -9,7 +9,6 @@ import Amazon from './Amazon';
 import AI21 from './AI21'
 import StableDiffusion from './StableDiffusion';
 import { Button, Menu, MenuItem, MenuButton } from '@aws-amplify/ui-react';
-import appLogo from "./telogo.png";
 
 const modelOptions = [
     'Anthropic: Claude',
@@ -19,7 +18,7 @@ const modelOptions = [
 ]
 
 const App = ({ signOut }) => {
-    document.title = 'TEL.me Chatbot Bedrock Demo (BETA)';
+    document.title = 'Bedrock Chatbot Demo (BETA)';
     const [modelSelected, setModelSelected] = useState('Anthropic: Claude');
     const [anthropicMessages, setAnthropicMessages] = useState([]);
     const [amazonMessages, setAmazonMessages] = useState([]);
@@ -77,7 +76,7 @@ const App = ({ signOut }) => {
     return (
         <div className="App">
             <div className="airwolf-header2">
-                {/*<svg className="bedrockDemo" viewBox="0 0 24 24" version="1.1" >
+                <svg className="bedrockDemo" viewBox="0 0 24 24" version="1.1" >
                     <title>Icon-Architecture/16/Arch_Amazon-Bedrock_16</title>
                     <defs>
                         <linearGradient x1="0%" y1="100%" x2="100%" y2="0%" id="linearGradient-1">
@@ -91,11 +90,9 @@ const App = ({ signOut }) => {
                         </g>
                     </g>
                     </svg>
-                    */}
-                <img src={appLogo} alt="Logo" className="logo-image" />
                 <div className="OtherModels">
-                    <p>TEL.me (Beta) </p>
-                   {/* <Menu menuAlign="start" className="NavMenu"
+                    <p>Model Selection: </p>
+                    <Menu menuAlign="start" className="NavMenu"
                     trigger={
                         <MenuButton id="menuButtonMain" width="40%">
                           {modelSelected}
@@ -112,7 +109,6 @@ const App = ({ signOut }) => {
                         
                     ))}
                     </Menu>
-                    */}
                 </div>
                 {/* <Button className="signOut" onClick={signOut}>Sign out</Button> */}
             </div>
