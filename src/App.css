@@ -2237,6 +2237,38 @@ button.amplify-menu-content__item.active {
     padding-left: 150px;
 }
 
+.star-rating{
+    font-family: Ember;
+    font-size: 16px;
+    text-align: left;
+}
 
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.on {
+  color: #e98300;
+}
+.off {
+  color: #ccc;
+}
+
+
+.logo-container {
+    text-align: center;
+  }
   
+  .logo-image {
 
+    position: left !important;
+    height: 60px !important;
+    top: -4px !important;
+    top: 1px;
+    width: 130px;
+    /* height: auto !important; */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  }

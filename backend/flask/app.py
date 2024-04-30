@@ -50,15 +50,14 @@ CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
  
 aws_region = 'us-east-1'
-# aws_service = 'bedrock'
+aws_service = 'bedrock'
 chathistory = []
  
-# aws_cli_profile_name = 'raminwillfinall'
-# session = boto3.Session(profile_name=aws_cli_profile_name)
-
-session = boto3.Session()
-#bedrock_client = session.client(service_name='bedrock', region_name=aws_region, endpoint_url='https://bedrock-runtime.'+aws_region+'.amazonaws.com')
-bedrock_client = session.client('bedrock-runtime',region_name=aws_region)
+aws_cli_profile_name = ''
+session = boto3.Session(profile_name=aws_cli_profile_name)
+#session = boto3.Session()
+bedrock_client = session.client(service_name='bedrock', region_name=aws_region, endpoint_url='https://bedrock-runtime.'+aws_region+'.amazonaws.com')
+#bedrock_client = session.client('bedrock-runtime',region_name=aws_region)
 pdf_directory = './output'
  
 app.config['UPLOAD_FOLDER'] = 'output'
@@ -454,6 +453,7 @@ def predict_conversation1():
         trychat = chathistory1
         chat_history = trychat
         print("chat_history:",chat_history)
+        
         trychat.append((question, ''))
         print(CONDENSE_QUESTION_PROMPT1.template)
         prediction = qa.run(question=question)
@@ -469,7 +469,6 @@ def predict_conversation_kendra():
     #print the langchain version
     payload = request.get_json()
  
-    # cl_llm = Bedrock(model_id="anthropic.claude-v1", client=bedrock_client, model_kwargs={"max_tokens_to_sample": 500}) # change model_id here
     cl_llm = Bedrock(model_id="anthropic.claude-v2", client=bedrock_client, model_kwargs={"max_tokens_to_sample": 500}) # change model_id here
     memory_chain = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
     
@@ -727,6 +726,7 @@ def call_stable_diffusion():
     print(request)
     print(payload['body'])
     print(json.loads(payload['body'])['text_prompts'][0]['text'])
+    
     if input_validation(json.loads(payload['body'])['text_prompts'][0]['text']):
         response =bedrock_client.invoke_model(
             body=payload['body'],
